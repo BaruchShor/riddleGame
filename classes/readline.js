@@ -1,4 +1,6 @@
-export default function readlindQuestion(massege){
-    const input = readline.question(massege);
+import readline from "readline-sync";
+
+export default function readlineQuestion(massege){
+    const input = readline.question(`${massege}\n`);
     return input;
 }

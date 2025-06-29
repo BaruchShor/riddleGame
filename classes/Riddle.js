@@ -1,4 +1,4 @@
-import {readlindQuestion} from "./readline.js";
+import readlineQuestion from "./readline.js";
 
 export class Riddle{
     constructor(id, name, taskDescription, correctAnswer){
@@ -10,10 +10,12 @@ export class Riddle{
 
     ask(){
         let answer;
-        console.log(this.this.taskDescription)
+        console.log(this.taskDescription)
+        const start = Date.now();
         do{
-            console.log(`Please enter your answer!`);
-            answer = readlindQuestion();
+            answer = readlineQuestion(`Please enter your answer!`);
         }while(answer != this.correctAnswer);
+        const end = Date.now();
+        return end - start;
     }
 }

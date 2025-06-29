@@ -1,8 +1,6 @@
-import riddesObg from "../riddles/ImportRiddles.js";
-import readline from "readline-sync";
 import {readlindQuestion} from "./readline.js";
 
-class Riddle{
+export class Riddle{
     constructor(id, name, taskDescription, correctAnswer){
         this.id =  id,
         this.name = name,
@@ -11,8 +9,11 @@ class Riddle{
     }
 
     ask(){
-        const answer = readlindQuestion();
+        let answer;
+        console.log(this.this.taskDescription)
+        do{
+            console.log(`Please enter your answer!`);
+            answer = readlindQuestion();
+        }while(answer != this.correctAnswer);
     }
 }
-
-

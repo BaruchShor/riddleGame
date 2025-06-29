@@ -1,127 +1,208 @@
+# 🧠 Riddle Game - A Console Puzzle Experience
 
-# 🎮 Riddle Game
+## 🎯 Project Description
 
-> *A minimalist terminal-based riddle game powered by JavaScript.*
+Riddle Game is a fully modular, console-based game built with **Node.js** and **JavaScript**, offering a fun way to solve brain-teasing riddles while tracking your response times. It's designed using clean OOP architecture and separation of concerns.
 
----
-
-## 🧠 Project Overview
-
-This project is a modular Node.js CLI game designed to challenge the user with a series of riddles.  
-While the gameplay is simple, the architecture behind the code follows best practices for modularity, maintainability, and separation of concerns.
+Players answer riddles under time pressure, and the system tracks performance and presents stats at the end. It uses custom-built classes and modules to manage players, riddles, input, and game flow.
 
 ---
 
-## 📂 Project Structure
+## 🚀 Features
+
+* 🎮 Interactive CLI gameplay.
+* ❓ Riddle generation and management.
+* ⏱️ Real-time response tracking.
+* 📊 Summary statistics per game session.
+* 🔄 Fully modular and extendable design.
+
+---
+
+## 🧱 Project Structure and Architecture
 
 ```
-riddle-game/
-├── app.js              # Application entry point
-├── manager.js          # Core game manager (imported by app.js)
-├── package.json        # Project metadata and dependencies
-└── package-lock.json   # Dependency lock file
+riddleGame/
+│
+├── app.js                    # Main entry point of the game
+├── manager.js                # Game flow manager
+├── riddleListCreator.js      # Riddle list builder from data
+│
+├── classes/                  # Class-based logic
+│   ├── Player.js             # Player class
+│   ├── Riddle.js             # Riddle class
+│   └── readline.js           # Custom input module
+│
+└── riddles/                  # Stores all riddle content
+    └── ImportRiddles.js      # Riddle data file
 ```
 
 ---
 
-## ⚙️ Core Architecture
+## 📂 Core Modules and Classes
 
-### 1. `app.js` – Entry Point
-- This is the root file where execution begins.
-- It imports and invokes the `game()` function from `manager.js`.
-- Responsible for bootstrapping only – no logic is written here.
+### 🔧 `app.js`
+
+> Entry point. Starts the game and manages initialization.
 
 ```js
-import game from "./manager.js";
-game();
+import { gameStart } from "./manager.js";
+gameStart();
 ```
 
-### 2. `manager.js` – Game Manager
-> (*You will need to review/modify based on actual content, which is not uploaded yet.*)
+### 🧠 `manager.js`
 
-Expected to contain:
-- All core gameplay logic
-- Question prompting and answer handling
-- Score tracking
-- End-of-game evaluation
+> Handles main game logic and game loop.
 
-Functions might include:
-- `initializeGame()` – Load riddles and setup variables
-- `askQuestion(riddle)` – Present the riddle and collect user input
-- `checkAnswer(userAnswer, correctAnswer)` – Validate user input
-- `showResults()` – Display final score and feedback
+#### Exposed Functions:
 
-This central controller orchestrates the game flow.
+* `export function gameStart()` - Starts the game.
+* `function handleGame(player, riddles)` - Controls the flow of presenting riddles.
+* `function finishGame(player)` - Prints final stats.
+
+### 🧩 `riddleListCreator.js`
+
+> Creates and returns a list of Riddle objects.
+
+#### Exposed Function:
+
+```js
+export function riddlesList() : Riddle[]
+```
+
+Maps the raw riddle data into fully constructed `Riddle` instances.
+
+### 👤 `Player.js`
+
+> Represents a player with name and statistics.
+
+```js
+export class Player {
+  constructor(name)
+  saveResult(time: number): void
+  getAverage(): number
+  getResults(): number[]
+  getName(): string
+}
+```
+
+### ❓ `Riddle.js`
+
+> Represents an individual riddle.
+
+```js
+export class Riddle {
+  constructor(id, name, taskDescription, correctAnswer)
+  getQuestion(): string
+  checkAnswer(answer: string): boolean
+}
+```
+
+### 🧾 `readline.js`
+
+> Simple wrapper for console input.
+
+```js
+export function ask(question: string): string
+```
+
+Uses `readline-sync` for blocking input prompts.
+
+### 📚 `riddles/ImportRiddles.js`
+
+> Exports the riddle data array used by the game.
+
+```js
+export default [
+  {
+    id: 1,
+    name: "Simple Riddle",
+    taskDescription: "What has keys but can't open locks?",
+    correctAnswer: "Keyboard"
+  },
+  ...
+]
+```
 
 ---
 
-## 🔁 Execution Flow
+## 🔁 Game Flow
 
-```
-[ app.js ]
-     │
-     ▼
-[ Import manager.js ]
-     │
-     ▼
-[ game() ]
-     ├── Load riddles (static or dynamic)
-     ├── For each riddle:
-     │     ├── Display question
-     │     ├── Capture input
-     │     └── Check correctness
-     └── Summarize score
+```text
+Player enters name
+     ↓
+Riddle is shown
+     ↓
+Player enters answer
+     ↓
+Answer is validated
+     ↓
+Time is recorded
+     ↓
+Repeat until all riddles done
+     ↓
+Final stats printed
 ```
 
 ---
 
-## 🔧 Dependencies
+## 📥 Getting Started
 
-- **readline-sync**: Used to capture input from the terminal synchronously.
+### Prerequisites
+
+* Node.js
+
+### Installation
 
 ```bash
-npm install readline-sync
-```
-
----
-
-## 🧱 Architectural Principles
-
-| Principle            | Implementation                                                                 |
-|----------------------|---------------------------------------------------------------------------------|
-| **Separation of Concerns** | `app.js` only initializes, `manager.js` controls logic                    |
-| **Single Responsibility**  | Each function has one job (ask, check, score, etc.)                       |
-| **Modularity**             | Logic isolated in its own module (`manager.js`)                           |
-| **Scalability**            | Easy to add new question types, timers, difficulty levels                 |
-| **Testability**            | Clear units make it test-friendly                                         |
-
----
-
-## 💡 Suggested Enhancements
-
-- Add a **riddle database** (JSON, API, or DB-based)
-- Introduce **difficulty levels**
-- Include **timeout mechanism** for each riddle
-- Add **score persistence** (write to file or database)
-- Optional: Convert to **GUI or Web version**
-
----
-
-## 🚀 Run the Game
-
-```bash
-git clone https://github.com/BaruchShor/riddleGame.git
-cd riddleGame
 npm install
+```
+
+### Running the Game
+
+```bash
 node app.js
 ```
 
 ---
 
-## 📬 Author
+## 🧪 Example Output
 
-**Baruch Zvi Shor**  
-📧 e0548597918@gmail.com  
-🔗 [GitHub Profile](https://github.com/BaruchShor)
+```text
+Welcome to the Riddle Game!
+Enter your name: Ershi
+
+1. I speak without a mouth...  → Answer: echo
+✅ Correct! Time: 5.2s
+
+2. What has to be broken... → Answer: egg
+✅ Correct! Time: 4.8s
 
 ---
+Game Over, Ershi!
+Average Time: 5.0 seconds
+All Answers Correct!
+```
+
+---
+
+## 🛠️ Contributing
+
+1. Fork the repo
+2. Create your branch: `git checkout -b feature/YourFeature`
+3. Commit your changes: `git commit -am 'Add feature'`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Open a Pull Request
+
+---
+
+## 🪪 License
+
+ISC License — free to use, modify, and share.
+
+---
+
+## ✨ Final Words
+
+This project is a great example of OOP and modular design in Node.js. Its simplicity, combined with scalability and clear architecture, makes it perfect for learning and extension.
+
+Want to challenge your mind? Run `node app.js` and get ready to riddle!

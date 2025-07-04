@@ -6,7 +6,7 @@ function updateRiddle(data){
     const idParameter = readlineQuestion("Enter the id for obj to update.\n");
     const parameterToChange = readlineQuestion("Which parameter do you want to update?.\n");
     const newParameter = readlineQuestion("Enter the new value.\n");    
-    let updatedRiddle = data.find(obj => obj.name === idParameter);    
+    let updatedRiddle = data.find(obj => obj.id === idParameter);    
     updatedRiddle[parameterToChange] = newParameter;
     fs.writeFile("RiddleCRUD/riddlesDataBase.txt", JSON.stringify(data));
 }

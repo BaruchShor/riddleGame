@@ -4,7 +4,7 @@ import { readRiddle } from "./readRiddle.js";
 
 function deletRiddle(data){
     const id = readlineQuestion("Enter the id for delete.")
-    const indexToDelete = data.findIndex(obj => obj.name === id);
+    const indexToDelete = data.findIndex(obj => obj.id === id);
     data.splice(indexToDelete,1);
     console.log(data);
     

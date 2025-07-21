@@ -1,6 +1,6 @@
 import readlineQuestion from "./readline.js";
 
-export class Riddle{
+export default class Riddle{
     constructor(id, name, taskDescription, correctAnswer){
         this.id =  id,
         this.name = name,

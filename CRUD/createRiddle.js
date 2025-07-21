@@ -1,10 +1,8 @@
-import readlineQuestion from "../classes/readline.js";
-import fs from "node:fs/promises";
-import { readRiddle } from "./readRiddle.js";
+import readlineQuestion from "../models/readline.js";
+import { createOBJ } from "../CRUDRiddleGame.js";
 
-function getNewRiddle(){
+export default function getNewRiddle(){
     const newRiddle = {
-        id: 2,
         level : "",
         name : "",
         taskDescription : "",
@@ -35,13 +33,8 @@ function getNewRiddle(){
     newRiddle.getName();
     newRiddle.getRiddle();
     newRiddle.getcorrectAnswer();
+    createOBJ('riddles',newRiddle);
     return newRiddle;
-}
+};
 
-
-export function createRiddle(data){
-    data.push(getNewRiddle())
-    fs.writeFile("RiddleCRUD/riddlesDataBase.txt",JSON.stringify(data));
-}
-
-readRiddle().then(data => createRiddle(data)).catch(err => console.log(err));
+getNewRiddle();

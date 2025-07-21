@@ -1,22 +1,18 @@
-import riddesObg from "./riddles/ImportRiddles.js";
-// import difficultRiddesObg from "./difficultRiddles/importDifficultRiddles.js";
-import {Riddle} from "./classes/Riddle.js";
-import readlineQuestion from "./readline.js";
+import { getOBJList } from "./CRUDRiddleGame.js";
+import Riddle from "./models/Riddle.js";
+import readlineQuestion from "./models/readline.js";
 
-
-function getLevel(){
-    const level = 0;
+async function getRiddleListByLevel(){
+    let level;
+    const riddlesList = await getOBJList('riddles');
+    console.log(riddlesList);
     do{
-        level = readlineQuestion(`If you want low level press 1: else if you want high level press 2`);
-    }while(level != 1 || level != 2);
-    if(level === 1){
-        return riddesObg;
-    }else{
-        return difficultRiddesObg;
-    }
+        level = readlineQuestion(`Please enter a level, from 1 to 3\n`);
+    }while(level < 1 || level > 3);
+    return riddlesList.filter(obj => obj.level == level);
 }
 
-export function riddlesList(){
-    const riddles = getLevel();
+export async function riddlesList(){
+    const riddles = await getRiddleListByLevel();
     return Object.values(riddles).map(riddles => new Riddle(riddles.id, riddles.name, riddles.taskDescription, riddles.correctAnswer));
 };

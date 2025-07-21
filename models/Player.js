@@ -1,6 +1,8 @@
 export class Player{
-    constructor(name){
-        this.name = name;
+    constructor(Obj){
+        this.name = Obj.name;
+        this.id = Obj.id;
+        this.record = Obj.record;
         this.timesArr = [];
     }
 

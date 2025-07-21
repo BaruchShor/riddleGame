@@ -1,3 +1,3 @@
-import game from "./manager.js";
+import game from "./gameManager.js";
 
 game();

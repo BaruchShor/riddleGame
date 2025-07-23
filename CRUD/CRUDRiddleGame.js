@@ -1,12 +1,12 @@
  // Read
- export async function getOBJList(path){
+async function getOBJList(path){
     return await fetch(`https://riddleservies.onrender.com/${path}`)
     .then(res => {return res.json()})
     .catch((err) => console.log(err)
 )};
 
 // Create
-export function createOBJ(path, Obj){
+function createOBJ(path, Obj){
     fetch(`https://riddleservies.onrender.com/${path}`,{
     method: 'POST',
     body: JSON.stringify(Obj),
@@ -19,7 +19,7 @@ export function createOBJ(path, Obj){
 };
 
 // Update
-export function updateOBJ(path, Obj){
+function updateOBJ(path, Obj){
     fetch(`https://riddleservies.onrender.com/${path}`,{
     method: 'PUT',
     body: JSON.stringify(Obj),
@@ -33,7 +33,7 @@ export function updateOBJ(path, Obj){
 };
 
 // Delete
-export function deleteOBJ(path, Obj){
+function deleteOBJ(path, Obj){
     fetch(`https://riddleservies.onrender.com/${path}`,{
     method: 'DELETE',
     body: JSON.stringify(Obj),
@@ -45,3 +45,5 @@ export function deleteOBJ(path, Obj){
     return res.json()
 }).catch(err => console.log(err.message))
 };
+
+export { getOBJList, createOBJ, updateOBJ, deleteOBJ };

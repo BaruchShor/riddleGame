@@ -1,3 +1,3 @@
-import displaySystem from "./appMenu.js";
+import displaySystem from "./gameSystem/appMenu.js";
 
 await displaySystem();

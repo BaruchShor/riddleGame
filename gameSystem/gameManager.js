@@ -1,7 +1,7 @@
-import {Player} from "./models/Player.js";
-import readlineQuestion from "./models/readline.js";
-import {getOBJList} from "./CRUD/CRUDRiddleGame.js";
-import {createPlayer} from "./CRUD/crudPlayer.js";
+import {Player} from "../models/Player.js";
+import readlineQuestion from "../models/readline.js";
+import {getOBJList, updateOBJ} from "../CRUD/CRUDRiddleGame.js";
+import {createPlayer} from "../CRUD/crudPlayer.js";
 import riddlesList from "./riddleListCreator.js";
 
 export default async function displayGame(){
@@ -15,6 +15,10 @@ export default async function displayGame(){
     riddles.forEach(riddle => {
         gamer.recordTime(riddle.ask());
     });
+    const recordObj = {
+        record : gamer.record
+    };
+    updateOBJ(`players/name/${encodeURIComponent(playerName)}`, {recordObj});
     gamer.showStats(playerName);
 };
 

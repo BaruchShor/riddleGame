@@ -1,6 +1,6 @@
-import { getOBJList } from "./CRUD/CRUDRiddleGame.js";
-import Riddle from "./models/Riddle.js";
-import readlineQuestion from "./models/readline.js";
+import { getOBJList } from "../CRUD/CRUDRiddleGame.js";
+import Riddle from "../models/Riddle.js";
+import readlineQuestion from "../models/readline.js";
 
 async function getRiddleListByLevel(){
     let level;

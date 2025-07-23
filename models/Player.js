@@ -11,6 +11,7 @@ export class Player{
     }
 
     showStats(name){
+        this.record = totaltime / this.timesArr.length;
         let totaltime = 0;
         this.timesArr.forEach(time => {
             totaltime += time;

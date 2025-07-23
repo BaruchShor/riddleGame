@@ -1,7 +1,7 @@
-import readlineQuestion from "./models/readline.js";
+import readlineQuestion from "../models/readline.js";
 import displayGame from "./gameManager.js";
-import { getAllPlayers, createPlayer, updatePlayer, deletePlayer } from "./CRUD/crudPlayer.js";
-import { getAllRiddles, cerateRiddle, updateRiddle, deleteRiddle } from "./CRUD/crudRiddle.js";
+import { getAllPlayers, createPlayer, updatePlayer, deletePlayer } from "../CRUD/crudPlayer.js";
+import { getAllRiddles, cerateRiddle, updateRiddle, deleteRiddle } from "../CRUD/crudRiddle.js";
 
 const MenusObj = {
     appMenu : ["press 1 to play a game.", "press 2 to do actions of riddles.","press 3 to do actions of players.", "press 4 to exit"],
@@ -27,6 +27,7 @@ const appMenu = {
     1 : displayGame,
     2 : () => showMenuOptions(MenusObj.actionRiddleMenu, actionPlayerMenu),
     3 : () => showMenuOptions(MenusObj.actionPlayerMenu, actionPlayerMenu),
+    4 : () => {return "exit"}
 };
 
 async function showMenuOptions(arr, obj){
@@ -35,8 +36,11 @@ async function showMenuOptions(arr, obj){
         console.log(arr[i]);
     };
     choose = getChoose(arr.length);
-    console.log(choose);
+    //console.log(choose);
     await obj[choose]();
+    if(choose == 4){
+        return "exit"
+    };
     return choose;
 };
 

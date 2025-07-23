@@ -1,3 +1,3 @@
-import game from "./gameManager.js";
+import displaySystem from "./appMenu.js";
 
-displayGame();
+await displaySystem();

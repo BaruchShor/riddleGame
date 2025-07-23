@@ -1,4 +1,4 @@
-import { getOBJList } from "./CRUDRiddleGame.js";
+import { getOBJList } from "./CRUD/CRUDRiddleGame.js";
 import Riddle from "./models/Riddle.js";
 import readlineQuestion from "./models/readline.js";
 
@@ -12,7 +12,7 @@ async function getRiddleListByLevel(){
     return riddlesList.filter(obj => obj.level == level);
 }
 
-export async function riddlesList(){
+export default async function riddlesList(){
     const riddles = await getRiddleListByLevel();
     return Object.values(riddles).map(riddles => new Riddle(riddles.id, riddles.name, riddles.taskDescription, riddles.correctAnswer));
 };

@@ -21,5 +21,5 @@ export async function showLeaderBoard(){
 
 export async function getThebestRecore(){
     const player = await getOBJList('players/top');
-    return player;
+    return player[0];
 };

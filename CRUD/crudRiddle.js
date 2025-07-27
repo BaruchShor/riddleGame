@@ -65,30 +65,30 @@ function cerateRiddle() {
 //need to get an object of tow objects, 1 for fiter(id, id-number) and 2 for update.
 function updateRiddle() {
   const obj = {
-    filter: {
-      id: "",
-      getid: function () {
-        this.id = getRiddleId();
+      filter: {
+        id: "",
       },
-    },
-    update: {
-      key: "",
-      value: "",
-      getKey: function () {
-        do {
-          this.key = readlineQuestion(
-            "Please enter a valid parameter to update (id, name)."
-          );
-        } while (this.key !== "id" && this.key !== "name");
+      update: {
+        key: "",
+        value: "",
       },
-      getValue: function () {
-        this.value = readlineQuestion("Please enter the new value to update.");
-      },
-    },
   };
-  obj.filter.getid();
-  obj.update.getKey();
-  obj.update.getValue();
+  function getid() {
+    filter.id = getRiddleId();
+  };
+  function getKey () {
+    do {
+      update.key = readlineQuestion(
+        "Please enter a valid parameter to update (id, name)."
+      );
+    } while (update.key !== "id" && update.key !== "name");
+  };
+  function getValue() {
+    update.value = readlineQuestion("Please enter the new value to update.");
+  };
+  getid();
+  getKey();
+  getValue();
   updateOBJ(`riddles`, obj);
   return obj;
 };

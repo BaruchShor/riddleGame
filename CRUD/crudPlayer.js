@@ -21,24 +21,31 @@ async function getAllPlayers() {
 
 async function createPlayer() {
   const newPlayer = {
-    id: 0,
     name: "",
+    id: 0,
+    role : "",
     record: 0,
+    getName: function () {
+      this.name = readlineQuestion(`Pleas enter your name.`);
+    },
     getId: function () {
         this.id = getPlayerId();
     },
-    getName: function () {
-      this.name = readlineQuestion(`Pleas enter your name.`);
+    getRole : function(){
+    do{
+        this.role = readlineQuestion("Please enter your role (user or asmin).");
+    }while(this.role != "user" && this.role != "admin");
     },
   };
   newPlayer.getName();
   newPlayer.getId();
-  createOBJ("players", newPlayer);
+  newPlayer.getRole();
+  await createOBJ("players", newPlayer);
   return newPlayer;
 };
 
 //need to get an object of tow objects, 1 for fiter(id, id-number) and 2 for update.
-function updatePlayer() {
+async function updatePlayer() {
   const obj = {
     filter: {
       id: "",
@@ -64,7 +71,8 @@ function updatePlayer() {
   obj.filter.getid();
   obj.update.getKey();
   obj.update.getValue();
-  updateOBJ("players", obj);
+  console.log(obj);
+  await updateOBJ("players", obj);
   return obj;
 };
 
